@@ -5,6 +5,9 @@ class Produto:
         self.preco = preco
         self.qtdEstoque = qtdEstoque
 
+    def __str__(self):
+        return f"{self.codigo}, {self.nome}, {self.preco}, {self.qtdEstoque}"
+
 
     # with open("produtos/produtos.csv", "r") as file:
     #     reader = csv.reader(file)
