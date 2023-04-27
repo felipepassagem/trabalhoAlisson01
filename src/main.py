@@ -22,14 +22,15 @@ produto = Produto("FGH345", "Celular", "1400.00", "5")
 estoque.add_produto(produto)
 
 
+#estoque.ordena_por_codigo(False)
+estoque.ordena_por_nome(True)
+estoque.removerRegistro("Produtoteste")
 
-# estoque.ordena_por_nome(False)
-estoque.ordena_por_codigo(False)
-# estoque.ordena_por_qtd(False)
-# # estoque.ordena_por_preco(True)
+#estoque.ordena_por_qtd(False)
+#estoque.ordena_por_preco(True)
 # estoque.get_qtd_produtos_total()
-# estoque.get_qtd_produtos_unicos()
-estoque.pesquisa("Celular", "nome")
+#estoque.get_qtd_produtos_unicos()
+#estoque.pesquisa("Produto2", "nome")
 
 
 

@@ -91,6 +91,9 @@ class Estoque:
     def get_qtd_produtos_unicos(self):
         print(self.qtdProdutosUnicos)
         # print(f"Qunatidade de produtos únicos em estoque: {len(self.__listaProdutos)}")
+
+
+
         
     def pesquisa(self, pesquisa, atributo):
         tamanholista = len(self.__listaProdutos)
@@ -100,6 +103,7 @@ class Estoque:
         
         if self.ordenado_por == atributo:
             if self.ordenadaCodigoDesc:
+                #########################
                 if atributo == "codigo":
                     left = 0
                     right = tamanholista - 1
@@ -115,34 +119,36 @@ class Estoque:
                         else:
                             left = mid + 1
 
-            if self.ordenadaNomeDesc:
-                if atributo == "codigo":
+                ################################
+
+            if self.ordenadaNomeAsc:
+                if atributo == "nome":
                     left = 0
                     right = tamanholista - 1
 
                     while left <= right:
                         mid = (left + right) // 2
                     
-                        if self.__listaProdutos[mid].codigo == pesquisa:
+                        if self.__listaProdutos[mid].nome == pesquisa:
                             print(self.__listaProdutos[mid])
                             break
-                        elif self.__listaProdutos[mid].codigo < pesquisa:
+                        elif self.__listaProdutos[mid].nome < pesquisa:
                             right = mid - 1
                         else:
                             left = mid + 1
         
-            if self.ordenadaNomeAsc:
-                if atributo == "codigo":
+            if self.ordenadaNomeDesc:
+                if atributo == "nome":
                     left = 0
                     right = tamanholista - 1
 
                     while left <= right:
                         mid = (left + right) // 2
-                        print(pesquisa > self.__listaProdutos[mid].codigo )
-                        if self.__listaProdutos[mid].codigo == pesquisa:
+                        print(pesquisa > self.__listaProdutos[mid].nome )
+                        if self.__listaProdutos[mid].nome == pesquisa:
                             print(self.__listaProdutos[mid])
                             break
-                        elif self.__listaProdutos[mid].codigo < pesquisa:
+                        elif self.__listaProdutos[mid].nome < pesquisa:
                             left = mid + 1
                         else:
                             right = mid - 1
@@ -204,6 +210,86 @@ class Estoque:
     def get_estoque(self):
         return self.__listaProdutos
 
+    def removerRegistro(self, codigo):
+        tamanholista = len(self.__listaProdutos)
+        if self.ordenado_por == "codigo":
+            
+
+            if self.ordenadaCodigoDesc:
+                
+                left = 0
+                right = tamanholista - 1
+
+                while left <= right:
+                    mid = (left + right) // 2
+                    
+                    if self.__listaProdutos[mid].codigo == codigo:
+                        # print(self.__listaProdutos[mid])
+                        self.__listaProdutos.pop(mid)
+                        print(self.__listaProdutos)
+                        break
+                    elif self.__listaProdutos[mid].codigo < codigo:
+                        right = mid - 1
+                    else:
+                        left = mid + 1
+            
+            if self.ordenadaCodigoAsc:
+                
+                left = 0
+                right = tamanholista - 1
+
+                while left <= right:
+                    mid = (left + right) // 2
+                    
+                    if self.__listaProdutos[mid].codigo == codigo:
+                        # print(self.__listaProdutos[mid])
+                        self.__listaProdutos.pop(mid)
+                        print(self.__listaProdutos)
+                        break
+                    elif self.__listaProdutos[mid].codigo < codigo:
+                        left = mid + 1
+                    else:
+                        right = mid - 1
+
+        if self.ordenado_por == "nome":
+            if self.ordenadaNomeDesc:
+                
+                left = 0
+                right = tamanholista - 1
+
+                while left <= right:
+                    mid = (left + right) // 2
+                    
+                    if self.__listaProdutos[mid].nome == codigo:
+                        print(self.__listaProdutos[mid].nome)
+                        self.__listaProdutos.pop(mid)
+                        print(self.__listaProdutos)
+                        break
+                    elif self.__listaProdutos[mid].nome < codigo:
+                        left = mid + 1
+                    else:
+                        right = mid - 1
+
+            if self.ordenadaNomeAsc:
+                
+                left = 0
+                right = tamanholista - 1
+
+                while left <= right:
+                    mid = (left + right) // 2
+                    
+                    if self.__listaProdutos[mid].nome == codigo:
+                        print(self.__listaProdutos[mid].nome)
+                        self.__listaProdutos.pop(mid)
+                        print(self.__listaProdutos)
+                        break
+                    elif self.__listaProdutos[mid].nome < codigo:
+                        right = mid - 1
+                    else:
+                        left = mid + 1
+                        
+                        
+        
     
 
     # with open("produtos/produtos.csv", "r") as file:
