@@ -47,5 +47,8 @@ print(estoque.atualizar("Celular", "nome", "nome", "TESTE"))
 #estoque.get_qtd_produtos_unicos()
 #estoque.pesquisa("Produto2", "nome")
 
-
-
+###############################################################################
+#
+#           NÃO TESTEI COM VALORES INVÁLIDOS
+#
+###############################################################################
