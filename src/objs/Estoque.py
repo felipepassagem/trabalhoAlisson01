@@ -1,6 +1,7 @@
 
 
 import statistics
+from objs.Produto import Produto
 
 class Estoque:
     
@@ -99,7 +100,7 @@ class Estoque:
         tamanholista = len(self.__listaProdutos)
         atributo = str(atributo)
 
-        print(self.ordenado_por)
+        
         
         if self.ordenado_por == atributo:
             if self.ordenadaCodigoDesc:
@@ -112,8 +113,8 @@ class Estoque:
                         mid = (left + right) // 2
                     
                         if self.__listaProdutos[mid].codigo == pesquisa:
-                            print(self.__listaProdutos[mid])
-                            break
+                            return(self.__listaProdutos[mid])
+                            
                         elif self.__listaProdutos[mid].codigo < pesquisa:
                             right = mid - 1
                         else:
@@ -130,8 +131,8 @@ class Estoque:
                         mid = (left + right) // 2
                     
                         if self.__listaProdutos[mid].nome == pesquisa:
-                            print(self.__listaProdutos[mid])
-                            break
+                            return(self.__listaProdutos[mid])
+                            
                         elif self.__listaProdutos[mid].nome < pesquisa:
                             right = mid - 1
                         else:
@@ -144,9 +145,9 @@ class Estoque:
 
                     while left <= right:
                         mid = (left + right) // 2
-                        print(pesquisa > self.__listaProdutos[mid].nome )
+                        #print(pesquisa > self.__listaProdutos[mid].nome )
                         if self.__listaProdutos[mid].nome == pesquisa:
-                            print(self.__listaProdutos[mid])
+                            return(self.__listaProdutos[mid])
                             break
                         elif self.__listaProdutos[mid].nome < pesquisa:
                             left = mid + 1
@@ -160,10 +161,10 @@ class Estoque:
 
                     while left <= right:
                         mid = (left + right) // 2
-                        print(pesquisa > self.__listaProdutos[mid].codigo )
+                        #print(pesquisa > self.__listaProdutos[mid].codigo )
                         if self.__listaProdutos[mid].codigo == pesquisa:
-                            print(self.__listaProdutos[mid])
-                            break
+                            return(self.__listaProdutos[mid])
+                            
                         elif self.__listaProdutos[mid].codigo < pesquisa:
                             left = mid + 1
                         else:
@@ -173,13 +174,13 @@ class Estoque:
             if atributo == "nome":
                 for i in range(tamanholista):
                     if self.__listaProdutos[i].nome == pesquisa:
-                        print(self.__listaProdutos[i])
-                        break
+                        return(self.__listaProdutos[i])
+                        
             elif atributo == "codigo":
                 for i in range(tamanholista):
                     if self.__listaProdutos[i].codigo == pesquisa:
-                        print(self.__listaProdutos[i]) 
-                    break
+                        return(self.__listaProdutos[i]) 
+                    
             
         
 
@@ -207,6 +208,10 @@ class Estoque:
         for item in self.__listaProdutos:
             print(str(item))
 
+    def print_listaProdutos(self):
+        for item in self.__listaProdutos:
+            print(str(item))
+
     def get_estoque(self):
         return self.__listaProdutos
 
@@ -214,7 +219,6 @@ class Estoque:
         tamanholista = len(self.__listaProdutos)
         if self.ordenado_por == "codigo":
             
-
             if self.ordenadaCodigoDesc:
                 
                 left = 0
@@ -225,9 +229,9 @@ class Estoque:
                     
                     if self.__listaProdutos[mid].codigo == codigo:
                         # print(self.__listaProdutos[mid])
+                        temp = self.__listaProdutos[mid]
                         self.__listaProdutos.pop(mid)
-                        print(self.__listaProdutos)
-                        break
+                        return(temp)
                     elif self.__listaProdutos[mid].codigo < codigo:
                         right = mid - 1
                     else:
@@ -243,9 +247,9 @@ class Estoque:
                     
                     if self.__listaProdutos[mid].codigo == codigo:
                         # print(self.__listaProdutos[mid])
+                        temp = self.__listaProdutos[mid]
                         self.__listaProdutos.pop(mid)
-                        print(self.__listaProdutos)
-                        break
+                        return(temp)
                     elif self.__listaProdutos[mid].codigo < codigo:
                         left = mid + 1
                     else:
@@ -261,10 +265,10 @@ class Estoque:
                     mid = (left + right) // 2
                     
                     if self.__listaProdutos[mid].nome == codigo:
-                        print(self.__listaProdutos[mid].nome)
+                        
+                        temp = self.__listaProdutos[mid]
                         self.__listaProdutos.pop(mid)
-                        print(self.__listaProdutos)
-                        break
+                        return(temp)
                     elif self.__listaProdutos[mid].nome < codigo:
                         left = mid + 1
                     else:
@@ -279,15 +283,48 @@ class Estoque:
                     mid = (left + right) // 2
                     
                     if self.__listaProdutos[mid].nome == codigo:
-                        print(self.__listaProdutos[mid].nome)
+                        
+                        temp = self.__listaProdutos[mid]
                         self.__listaProdutos.pop(mid)
-                        print(self.__listaProdutos)
-                        break
+                        return(temp)
+                        
                     elif self.__listaProdutos[mid].nome < codigo:
                         right = mid - 1
                     else:
                         left = mid + 1
-                        
+
+        if self.ordenado_por == "":
+            for i in range(tamanholista):
+                if codigo == self.__listaProdutos[i].codigo or codigo == self.__listaProdutos[i].nome:
+                    self.__listaProdutos.pop(i)
+                    return i
+            print("Produto não encontrado.")
+
+    def atualizar(self, codigo, campoBusca, campo, novoValor):
+        x = self.pesquisa(codigo, campoBusca)
+        
+        
+        if x != None:
+            if campo == "nome":
+                x.setNome(novoValor)
+            
+                return x
+            if campo == "codigo":
+                x.setCodigo(novoValor)
+                
+                return x
+            if campo == "preco":
+                x.setPreco(novoValor)
+            
+                return x
+            if campo == "qtdEstoque":
+                x.setQtdEstoque(novoValor)
+                
+                return x
+        else:
+            print("Produto não encontrado")
+            
+
                         
         
     
